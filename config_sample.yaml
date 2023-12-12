@@ -1,0 +1,13 @@
+app:
+  app_mode:
+  app_port:
+database:
+  mariadb:
+    db_host:
+    db_port:
+    db_user:
+    db_password:
+    db_name:
+line_bot:
+  access_token:
+  user_id:

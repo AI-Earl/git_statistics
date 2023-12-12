@@ -32,6 +32,10 @@ class BaseConfig:
         self.MARIADB_URI = f"mysql+pymysql://{mariadb_config['db_user']}:{mariadb_config['db_password']}@" \
                            f"{mariadb_config['db_host']}:{mariadb_config['db_port']}/{mariadb_config['db_name']}"
 
+        # line_bot info
+        self.LINE_BOT_TOKEN = configs['line_bot']['access_token']
+        self.LINE_BOT_USER_ID = configs['line_bot']['user_id']
+
 
 class DevelopmentConfig(BaseConfig):
     MODE = "development"

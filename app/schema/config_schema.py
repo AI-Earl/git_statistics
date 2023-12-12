@@ -18,9 +18,15 @@ class DatabaseSchemas(Schema):
     mariadb = fields.Nested(DatabaseSchema)
 
 
+class LineBotSchema(Schema):
+    access_token = fields.Str(required=True)
+    user_id = fields.Str(required=True)
+
+
 class ConfigsSchema(Schema):
     app = fields.Nested(AppSchema)
     database = fields.Nested(DatabaseSchemas)
+    line_bot = fields.Nested(LineBotSchema)
 
 
 class PyprojectSchema(Schema):
@@ -29,4 +35,4 @@ class PyprojectSchema(Schema):
     description = fields.Str(required=True)
 
     class Meta:
-        unknown = EXCLUDE   # exclude unknown fields
+        unknown = EXCLUDE  # exclude unknown fields
