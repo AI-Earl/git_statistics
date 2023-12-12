@@ -4,10 +4,10 @@ import toml
 from pathlib import Path
 
 from app.schema.config_schema import ConfigsSchema, PyprojectSchema
-from app.utility.logger import logger
 
 
 class BaseConfig:
+    MODE = None
     DEBUG = False
     TESTING = False
 
@@ -17,7 +17,7 @@ class BaseConfig:
     }
 
     def __init__(self, configs: dict):
-        logger.info(f'System Run in {configs["app"]["app_mode"]} Mode.')
+        print(f'System Run in {configs["app"]["app_mode"]} Mode.')
 
         # project info
         self.PROJEDCT_NAME = configs['name']
@@ -34,14 +34,17 @@ class BaseConfig:
 
 
 class DevelopmentConfig(BaseConfig):
+    MODE = "development"
     DEBUG = True
 
 
 class TestingConfig(BaseConfig):
+    MODE = "testing"
     TESTING = True
 
 
 class ProductionConfig(BaseConfig):
+    MODE = "production"
     pass
 
 
@@ -89,12 +92,12 @@ class ConfigManager:
     @staticmethod
     def _verify_file_exist():
         if (env_file := os.getenv("CONFIG_FILE")) is None:
-            logger.warning("No CONFIG_FILE in environment variable, use default config_dev.yaml")
+            print("No CONFIG_FILE in environment variable, use default config_dev.yaml")
             env_file = "config_dev.yaml"
 
         yaml_file_absolute_path = Path(__file__).parent.absolute() / env_file
         if not yaml_file_absolute_path.exists():
-            logger.critical(f"Cannot find config file: {yaml_file_absolute_path}")
+            print(f"Cannot find config file: {yaml_file_absolute_path}")
             exit(4)
 
         return yaml_file_absolute_path
