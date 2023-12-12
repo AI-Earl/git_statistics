@@ -86,12 +86,14 @@ class ConfigManager:
 
     def load_toml(self) -> dict:
         pyproject_path = "./pyproject.toml"
+        pyproject_dict = {}
 
-        # read pyproject.toml
-        with open(pyproject_path, "r") as f:
-            pyproject_data = toml.load(f)
+        if Path(pyproject_path).exists():
+            # read pyproject.toml
+            with open(pyproject_path, "r") as f:
+                pyproject_dict = toml.load(f)['tool']['poetry']
 
-        return PyprojectSchema().load(pyproject_data['tool']['poetry'])
+        return PyprojectSchema().load(pyproject_dict)
 
     @staticmethod
     def _verify_file_exist():
