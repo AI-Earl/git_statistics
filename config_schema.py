@@ -30,9 +30,9 @@ class ConfigsSchema(Schema):
 
 
 class PyprojectSchema(Schema):
-    name = fields.Str(required=True)
-    version = fields.Str(required=True)
-    description = fields.Str(required=True)
+    name = fields.Str(load_default='Project Name')
+    version = fields.Str(load_default='0.0.0')
+    description = fields.Str(load_default='Project Description')
 
     class Meta:
         unknown = EXCLUDE  # exclude unknown fields

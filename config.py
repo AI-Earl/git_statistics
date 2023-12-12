@@ -3,7 +3,7 @@ import yaml
 import toml
 from pathlib import Path
 
-from app.schema.config_schema import ConfigsSchema, PyprojectSchema
+from config_schema import ConfigsSchema, PyprojectSchema
 
 
 class BaseConfig:
