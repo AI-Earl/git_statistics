@@ -20,7 +20,7 @@ class BaseConfig:
         print(f'System Run in {configs["app"]["app_mode"]} Mode.')
 
         # project info
-        self.PROJEDCT_NAME = configs['name']
+        self.PROJECT_NAME = configs['name']
         self.VERSION = configs['version']
         self.DESCRIPTION = configs['description']
 
@@ -98,12 +98,12 @@ class ConfigManager:
     @staticmethod
     def _verify_file_exist():
         if (env_file := os.getenv("CONFIG_FILE")) is None:
-            print("No CONFIG_FILE in environment variable, use default config_dev.yaml")
+            print("No CONFIG_FILE in environment variable, use default \033[31mconfig_dev.yaml\033[0m")
             env_file = "config_dev.yaml"
 
         yaml_file_absolute_path = Path(__file__).parent.absolute() / env_file
         if not yaml_file_absolute_path.exists():
-            print(f"Cannot find config file: {yaml_file_absolute_path}")
+            print(f"Cannot find config file: \033[31m {yaml_file_absolute_path} \033[0m")
             exit(4)
 
         return yaml_file_absolute_path
